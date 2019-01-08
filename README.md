@@ -1,11 +1,14 @@
-React Hello World Demo
-======================
+Render a React Component in Angularjs1 Demo
+===========================================
 
-Just say hello from react.
+And they also communicates.
 
 ```
 npm install
 npm start
 ```
 
-Then visit <http://localhost:8080/webpack-dev-server/>.
+References
+----------
+
+- <https://github.com/Gethyl/AngularJsWithReact>
