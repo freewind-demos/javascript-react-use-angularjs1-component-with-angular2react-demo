@@ -1,6 +1,6 @@
 module.exports = {
     mode: "development",
-    entry: './entry.js',
+    entry: './entry.jsx',
     output: {
         path: __dirname,
         filename: 'bundle.js'
@@ -13,6 +13,9 @@ module.exports = {
                     presets: [
                         '@babel/preset-env',
                         '@babel/preset-react'
+                    ],
+                    plugins: [
+                        "@babel/plugin-proposal-class-properties"
                     ]
                 }
             }]
