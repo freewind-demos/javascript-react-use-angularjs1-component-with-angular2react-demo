@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import angular from 'angular';
-import ngHelloModule from './ng-hello-module';
+import NgComponentWrapper from './ng-component-wrapper';
 
 class ReactHello extends Component {
 
@@ -17,51 +16,20 @@ class ReactHello extends Component {
     });
   }
 
+  onAngularMessageChange = (message) => {
+    console.log('onAngularMessageChange')
+    this.setState({
+      message: message
+    });
+  }
+
   render() {
     return <div>
       React: <input type="text" value={this.state.message} onChange={this.onChange}/>
-      <div ref="ngRoot"
-           dangerouslySetInnerHTML={{__html: '<hello-directive message="message" on-message-change="onMessageChange"/>'}}/>
+      <NgComponentWrapper message={this.state.message} onMessageChange={this.onAngularMessageChange}/>
     </div>;
   }
 
-  ngRootScope = null
-  ngTimeout = null
-
-  componentDidMount() {
-    console.log('> componentDidMount');
-    ngHelloModule.run(($rootScope, $timeout) => {
-      console.log('ngHelloModule.run')
-      this.ngRootScope = $rootScope;
-      this.ngTimeout = $timeout;
-
-      this.ngRootScope.message = this.state.message;
-      this.ngRootScope.onMessageChange = (message) => {
-        this.setState({
-          message: message
-        })
-      }
-    })
-
-    const ngRoot = this.refs.ngRoot
-    angular.bootstrap(ngRoot, [ngHelloModule.name])
-  }
-
-  componentWillUnmount() {
-    console.log('> componentWillUnmount');
-    this.ngRootScope.$destroy();
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('> componentDidUpdate');
-    if (prevState.message !== this.state.message) {
-      this.ngTimeout(() => {
-        this.ngRootScope.message = this.state.message;
-      })
-    }
-  }
-
 }
-
 
 export default ReactHello;

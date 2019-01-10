@@ -2,14 +2,16 @@ import angular from 'angular';
 
 const ngHelloModule = angular.module('helloModule', []);
 
-ngHelloModule.component('helloDirective', {
+export const HelloComponent = {
   template: `<div>Angular: <input type="text" ng-model="$ctrl.message" ng-change="$ctrl.onMessageChange($ctrl.message)"></div>`,
   bindings: {
-    message: '=',
-    onMessageChange: '='
+    message: '<',
+    onMessageChange: '<'
   },
   controller: function () {
   }
-});
+};
+
+ngHelloModule.component('helloComponent', HelloComponent);
 
 export default ngHelloModule;
