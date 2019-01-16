@@ -3,15 +3,6 @@ import {angular2react} from 'angular2react'
 
 let $injector;
 
-console.log('11111')
-
-ngHelloModule
-  .run(($rootScope) => {
-    console.log('$rootScope:', $rootScope)
-  })
-
-console.log('2222')
-
 angular
   .module(ngHelloModule.name)
   .run(['$injector', function (_$injector) {
